@@ -8,7 +8,7 @@ if (!builder.Environment.IsDevelopment())
 {
     var keyVaultUrl = "https://kv-delivery-api-2.vault.azure.net/";
     builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUrl), new DefaultAzureCredential());
-}
+}  
 
 builder.Services.AddControllers(); // FIX: Adds support for [ApiController] and Controllers
 builder.Services.AddAuthorization();
