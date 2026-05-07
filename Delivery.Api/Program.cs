@@ -23,6 +23,8 @@ builder.Services.AddAuthorization();
 builder.Services.AddSingleton<OrderService>();
 builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration["StorageConnection"]));
 builder.Services.AddScoped<BlobService>();
+
+builder.Services.AddApplicationInsightsTelemetry();
 var app = builder.Build();
 
 app.UseSwagger();   // Serves the raw JSON file (swagger.json)
