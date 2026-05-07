@@ -38,7 +38,12 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddSingleton<OrderService>();
-builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration["StorageConnection"]));
+var storageConnection = builder.Configuration["StorageConnection"];
+
+Console.WriteLine($"StorageConnection Exists: {!string.IsNullOrEmpty(storageConnection)}");
+
+builder.Services.AddSingleton(x =>
+    new BlobServiceClient(storageConnection));
 builder.Services.AddScoped<BlobService>();
 
 builder.Services.AddApplicationInsightsTelemetry();
