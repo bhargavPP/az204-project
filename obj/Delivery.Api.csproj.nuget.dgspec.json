@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Azure\\az204-project\\Delivery.Api\\Delivery.Api.csproj": {}
+    "D:\\Azure\\az204-project\\Delivery.Api.csproj": {}
   },
   "projects": {
-    "D:\\Azure\\az204-project\\Delivery.Api\\Delivery.Api.csproj": {
+    "D:\\Azure\\az204-project\\Delivery.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Azure\\az204-project\\Delivery.Api\\Delivery.Api.csproj",
+        "projectUniqueName": "D:\\Azure\\az204-project\\Delivery.Api.csproj",
         "projectName": "Delivery.Api",
-        "projectPath": "D:\\Azure\\az204-project\\Delivery.Api\\Delivery.Api.csproj",
+        "projectPath": "D:\\Azure\\az204-project\\Delivery.Api.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\Azure\\az204-project\\Delivery.Api\\obj\\",
+        "outputPath": "D:\\Azure\\az204-project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -52,6 +52,10 @@
           "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.11.4, )"
+            },
             "Azure.Storage.Blobs": {
               "target": "Package",
               "version": "[12.27.0, )"
