@@ -6,8 +6,19 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 if (!builder.Environment.IsDevelopment())
 {
-    var keyVaultUrl = "https://kv-delivery-api-2.vault.azure.net/";
-    builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUrl), new DefaultAzureCredential());
+    try
+    {
+        var keyVaultUrl = builder.Configuration["KeyVaultUrl"];
+
+        builder.Configuration.AddAzureKeyVault(
+            new Uri(keyVaultUrl!),
+            new DefaultAzureCredential());
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Key Vault failed: {ex.Message}");
+    }
+    
 }  
 
 builder.Services.AddControllers(); // FIX: Adds support for [ApiController] and Controllers

@@ -7,8 +7,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<!-- 1. Force Logging to 8.0.1 -->
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+	 
 
 		<!-- 2. Use stable Azure packages -->
 		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.3.1" />
