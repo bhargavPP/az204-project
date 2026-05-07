@@ -7,12 +7,18 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.7.0" />
+		<!-- Using 1.5.1 as confirmed by your error log -->
+		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.5.1" />
+		<!-- Stable 1.11.4 is widely available -->
 
+		<!-- Standard stable version -->
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+		<!-- Standard stable version -->
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
+		<!-- Standard stable version for .NET 8 -->
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
+
 
 
 </Project>

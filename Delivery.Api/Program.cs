@@ -1,7 +1,8 @@
 using Azure.Storage.Blobs;
 using Delivery.Api.Service;
-using Microsoft.OpenApi;
+ 
 using Azure.Identity;
+using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 if (!builder.Environment.IsDevelopment())
 {
@@ -15,7 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     // Optional: Customize API info (Title, Version, etc.)
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.OpenApiInfo
+    options.SwaggerDoc("v1", new  OpenApiInfo
     {
         Title = "My API",
         Version = "v1",
