@@ -4,6 +4,7 @@ using Delivery.Api.Service;
 using Azure.Identity;
 using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
+Console.WriteLine("APP STARTING");
 if (!builder.Environment.IsDevelopment())
 {
     try
