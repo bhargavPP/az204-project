@@ -1,4 +1,4 @@
-name: Deploy Azure Function
+name: Deploy Delivery API
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  AZURE_FUNCTIONAPP_NAME: delivery-functions
+  AZURE_WEBAPP_NAME: delivery-api
   DOTNET_VERSION: '8.0.x'
 
 jobs:
@@ -23,15 +23,15 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-- name: Restore
-  run: dotnet restore Delivery.Functions/Delivery.Functions.csproj
+    - name: Restore API Project
+      run: dotnet restore Delivery.Api.csproj
 
-- name: Build
-  run: dotnet build Delivery.Functions/Delivery.Functions.csproj --configuration Release
+    - name: Build API Project
+      run: dotnet build Delivery.Api.csproj --configuration Release --no-restore
 
-    - name: Publish
+    - name: Publish API Project
       run: |
-        dotnet publish Delivery.Functions/Delivery.Functions.csproj \
+        dotnet publish Delivery.Api.csproj \
           --configuration Release \
           --output publish
 
@@ -40,8 +40,8 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Deploy to Azure Functions
-      uses: Azure/functions-action@v1
+    - name: Deploy API to Azure Web App
+      uses: azure/webapps-deploy@v3
       with:
-        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: publish
