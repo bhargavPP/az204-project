@@ -6,7 +6,7 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
 var logger = loggerFactory.CreateLogger("Program");
-logger.LogInformation(  "Program started");
+logger.LogInformation("Program started");
 if (!builder.Environment.IsDevelopment())
 {
     try
@@ -52,7 +52,7 @@ builder.Services.AddScoped<BlobService>();
 builder.Services.AddApplicationInsightsTelemetry();
 var app = builder.Build();
 app.MapGet("/", () => "API Running");
-
+logger.LogInformation("API is running");
 app.MapGet("/health", () => Results.Ok("Healthy"));
 app.UseSwagger();   // Serves the raw JSON file (swagger.json)
 app.UseSwaggerUI(); // Serves the visual HTML page (index.html)
