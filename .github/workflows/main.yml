@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  AZURE_FUNCTIONAPP_NAME: Delivery.Functions
+  AZURE_FUNCTIONAPP_NAME: Delivery-Functions
   DOTNET_VERSION: '8.0.x'
 
 jobs:
