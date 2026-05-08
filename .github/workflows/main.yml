@@ -1,38 +1,40 @@
-name: Deploy to Azure Web App
+name: Deploy Azure Function
 
 on:
   push:
     branches:
       - master
 
+env:
+  AZURE_FUNCTIONAPP_NAME: Delivery-Functions
+  DOTNET_VERSION: '8.0.x'
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
 
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-      - name: Restore
-        run: dotnet restore Delivery.Api/Delivery.Api.csproj
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Build
-        run: dotnet build Delivery.Api/Delivery.Api.csproj --configuration Release --no-restore
+    - name: Build Function App
+      run: dotnet build Delivery.Functions/Delivery.Functions.csproj --configuration Release
 
-      - name: Publish
-        run: dotnet publish Delivery.Api/Delivery.Api.csproj -c Release -o ./publish --no-build
+    - name: Publish Function App
+      run: |
+        dotnet publish Delivery.Functions/Delivery.Functions.csproj \
+          --configuration Release \
+          --output publish
 
-      - name: Log in to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'delivery-api-2'
-          package: ./publish
+    - name: Deploy to Azure Functions
+      uses: Azure/functions-action@v1
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        package: publish
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
