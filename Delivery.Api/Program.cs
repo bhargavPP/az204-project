@@ -1,10 +1,12 @@
 using Azure.Storage.Blobs;
 using Delivery.Api.Service;
- 
+using Microsoft.Extensions.Logging;
 using Azure.Identity;
 using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
-Console.WriteLine("APP STARTING");
+using var loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
+var logger = loggerFactory.CreateLogger("Program");
+logger.LogInformation(  "Program started");
 if (!builder.Environment.IsDevelopment())
 {
     try
@@ -17,7 +19,7 @@ if (!builder.Environment.IsDevelopment())
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Key Vault failed: {ex.Message}");
+        logger.LogError(ex, "Key Vault failed");
     }
     
 }  
