@@ -44,7 +44,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddSingleton<OrderService>();
 var storageConnection = builder.Configuration["StorageConnection"];
 
-Console.WriteLine($"StorageConnection Exists: {!string.IsNullOrEmpty(storageConnection)}");
+logger.LogInformation($"StorageConnection Exists: {!string.IsNullOrEmpty(storageConnection)}");
 
 builder.Services.AddSingleton(x =>
     new BlobServiceClient(storageConnection));
