@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
 var logger = loggerFactory.CreateLogger("Program");
-logger.LogInformation("Program started");
+ 
 if (!builder.Environment.IsDevelopment())
 {
     try
@@ -44,12 +44,10 @@ builder.Services.AddAuthorization();
 builder.Services.AddSingleton<OrderService>();
 var storageConnection = builder.Configuration["StorageConnection"];
 
-logger.LogInformation($"StorageConnection Exists: {!string.IsNullOrEmpty(storageConnection)}");
-
 builder.Services.AddSingleton(x =>
     new BlobServiceClient(storageConnection));
 builder.Services.AddScoped<BlobService>();
-
+builder.Services.AddSingleton<QueueService>();
 builder.Services.AddApplicationInsightsTelemetry();
 var app = builder.Build();
 app.MapGet("/", () => "API Running");

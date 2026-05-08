@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Delivery.Api/Delivery.Api.csproj" />
+  <Project Path="Delivery.Functions/Delivery.Functions.csproj" Id="6dc52646-8385-45ca-8401-f88b95c67c68" />
 </Solution>
