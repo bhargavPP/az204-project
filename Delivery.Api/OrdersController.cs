@@ -1,6 +1,7 @@
 ﻿using Delivery.Api.Models;
 using Delivery.Api.Service;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Delivery.Api
@@ -38,6 +39,7 @@ namespace Delivery.Api
         [HttpPost("upload")]
         public async Task<IActionResult> Upload(IFormFile file, BlobService blobService)
         {
+            _logger.LogInformation("Upload");
             if (file == null || file.Length == 0)
             {
                 return BadRequest("No file uploaded.");
