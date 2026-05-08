@@ -3,6 +3,7 @@ using Delivery.Api.Service;
 using Microsoft.Extensions.Logging;
 using Azure.Identity;
 using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
 var logger = loggerFactory.CreateLogger("Program");
