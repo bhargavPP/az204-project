@@ -22,7 +22,9 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
-
+    - name: Clean
+      run: dotnet clean Delivery.Functions/Delivery.Functions.csproj
+      
     - name: Restore Function Project
       run: dotnet restore Delivery.Functions/Delivery.Functions.csproj
 
@@ -33,7 +35,7 @@ jobs:
       run: |
         dotnet publish Delivery.Functions/Delivery.Functions.csproj \
           --configuration Release \
-          --output publish
+          --output ./publish
 
     - name: Azure Login
       uses: azure/login@v2
