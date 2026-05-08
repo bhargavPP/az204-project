@@ -12,11 +12,13 @@ namespace Delivery.Api
         private readonly OrderService _service;
         private readonly BlobService _blobService;
         private readonly QueueService _queueService;
-        public OrdersController(OrderService service, BlobService blobService, QueueService queueService)
+        private readonly ILogger<OrdersController> _logger;
+        public OrdersController(OrderService service, BlobService blobService, QueueService queueService, ILogger<OrdersController> logger)
         {
             _service = service;
             _blobService = blobService;
             _queueService = queueService;
+            _logger = logger;
         }
         [HttpGet]
         public IActionResult Get()
@@ -28,7 +30,9 @@ namespace Delivery.Api
         public async Task<IActionResult> Create(Order order)
         {
             var result = _service.Create(order);
+            _logger.LogInformation("Order created with ID: {OrderId}", result.Id);
             await _queueService.SendMessageAsync("orders",result);
+            _logger.LogInformation("Order sent with message ID: {OrderId}", result.Id);
             return Ok(result);
         }
         [HttpPost("upload")]
