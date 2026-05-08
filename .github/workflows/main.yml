@@ -24,14 +24,14 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Restore API Project
-      run: dotnet restore Delivery.Api.csproj
+      run: dotnet restore Delivery.Api/Delivery.Api.csproj
 
     - name: Build API Project
-      run: dotnet build Delivery.Api.csproj --configuration Release --no-restore
+      run: dotnet build Delivery.Api/Delivery.Api.csproj --configuration Release --no-restore
 
     - name: Publish API Project
       run: |
-        dotnet publish Delivery.Api.csproj \
+        dotnet publish Delivery.Api/Delivery.Api.csproj \
           --configuration Release \
           --output publish
 
