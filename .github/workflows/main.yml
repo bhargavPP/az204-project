@@ -23,11 +23,11 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Restore
-      run: dotnet restore
+- name: Restore
+  run: dotnet restore Delivery.Functions/Delivery.Functions.csproj
 
-    - name: Build
-      run: dotnet build --configuration Release
+- name: Build
+  run: dotnet build Delivery.Functions/Delivery.Functions.csproj --configuration Release
 
     - name: Publish
       run: |
